@@ -24,7 +24,7 @@ function PopNewCard() {
                     name="name"
                     id="formTitle"
                     placeholder="Введите название задачи..."
-
+                    autoFocus=""
                   />
                 </div>
                 <div className="form-new__block">
