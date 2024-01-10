@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import { breakpoints } from "../../lib/breakpoints";
 
 export const CardsColumn = styled.div`
  width: 100%;
@@ -22,4 +23,9 @@ color: #94A6BE;
   export const MainColumn = styled.div`
    width: 20%;
   margin: 0 auto;
-  display: block;`
+  display: block;
+  @media(max-width:${breakpoints.xl}px) { 
+    width: 100%;
+    margin: 0 auto;
+    display: block;
+  }`
