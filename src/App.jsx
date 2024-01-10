@@ -8,16 +8,17 @@ import PopExit from './components/PopExit/PopExit'
 import PopNewCard from './components/PopNewCard/PopNewCard'
 import Wrapper from './components/Wrapper/Wrapper'
 import { cardList } from './data'
+import { GlobalStyle } from './Global.styled'
 
 function App() {
 	const [cards, setCards] = useState(cardList);
-	const[isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-setTimeout(() => {
-setIsLoading(false)
-},1000)
-	},[])
+		setTimeout(() => {
+			setIsLoading(false)
+		}, 1000)
+	}, [])
 
 	function addCard() {
 		setCards([
@@ -38,13 +39,16 @@ setIsLoading(false)
 		])
 	}
 
-	return (<Wrapper>
-		<PopExit />
-		<PopNewCard />
-		<PopBrowse />
-		<Header addCard={addCard} />
-		<Main isLoading={isLoading} cardList={cards} />
-	</Wrapper>)
+	return (<>
+		<GlobalStyle />
+		<Wrapper>
+			<PopExit />
+			<PopNewCard />
+			<PopBrowse />
+			<Header addCard={addCard} />
+			<Main isLoading={isLoading} cardList={cards} />
+		</Wrapper>
+	</>)
 }
 
 export default App
