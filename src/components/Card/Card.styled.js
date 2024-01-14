@@ -13,6 +13,19 @@ export const CardItem = styled.div`
     overflow-y: auto;
   }
 `;
+export const CardBtn = styled.div`
+ width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 2px;`
+
+export const CardBtnDiv = styled.div`
+   width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: #94A6BE;`
 
 export const CardWrapper = styled.div`
   width: 220px;

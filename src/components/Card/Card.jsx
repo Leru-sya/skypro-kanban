@@ -1,4 +1,4 @@
-import { CardContent, CardDate, CardDateP, CardDateSvg, CardGroup, CardItem, CardTheme, CardThemeText, CardTitle, CardWrapper } from "./Card.styled"
+import { CardBtn, CardBtnDiv, CardContent, CardDate, CardDateP, CardDateSvg, CardGroup, CardItem, CardTheme, CardThemeText, CardTitle, CardWrapper } from "./Card.styled"
 
 function Card({ name, theme, date }) {
     let color;
@@ -19,12 +19,14 @@ function Card({ name, theme, date }) {
                         <CardThemeText>{theme}</CardThemeText>
                     </CardTheme>
                     <a href="#popBrowse" target="_self">
-                        <div className="card__btn">
-                            {/* Не понимаю как это сделать */}
-                            <div />
-                            <div />
-                            <div />
-                        </div>
+
+                        <CardBtn>
+
+                            <CardBtnDiv>
+                                <div /></CardBtnDiv>
+                            <CardBtnDiv><div /></CardBtnDiv>
+                            <CardBtnDiv><div /></CardBtnDiv>
+                        </CardBtn>
                     </a>
                 </CardGroup>
 

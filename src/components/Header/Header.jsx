@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Container } from "../Common/Common.styled";
-import { HeaderItem, HeaderBlock, HeaderLogo, HeaderNav, MainButton, UserName, HeaderImg } from "./Header.styled";
+import { HeaderItem, HeaderBlock, HeaderLogo, HeaderNav, MainButton, UserName, HeaderImg, PopUserName, PopUserMail, PopUserTheme, PopUserThemeP, Checkbox } from "./Header.styled";
 
 function Header({ addCard }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,12 +38,15 @@ function Header({ addCard }) {
 
             >
               <a href=""></a>
-              <p className="pop-user-set__name">Ivan Ivanov</p>
-              <p className="pop-user-set__mail">ivan.ivanov@gmail.com</p>
-              <div className="pop-user-set__theme">
-                <p>Темная тема</p>
-                <input type="checkbox" className="checkbox" name="checkbox" />
-              </div>
+
+              <PopUserName>Ivan Ivanov</PopUserName>
+              <PopUserMail>ivan.ivanov@gmail.com</PopUserMail>
+
+              <PopUserTheme>
+                <PopUserThemeP>Темная тема</PopUserThemeP>
+
+                <Checkbox type="checkbox" name="checkbox" />
+              </PopUserTheme>
               <button type="button" className="_hover03">
                 <a href="#popExit">Выйти</a>
               </button>

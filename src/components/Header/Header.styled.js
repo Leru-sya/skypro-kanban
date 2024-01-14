@@ -65,7 +65,7 @@ width: 178px;
   }
   `;
 
-  export const UserName = styled.a`
+export const UserName = styled.a`
    height: 20px;
   display: flex;
   flex-wrap: nowrap;
@@ -78,4 +78,61 @@ width: 178px;
   &:hover{
     color: #33399b;
   }
+  `;
+
+export const PopUserName = styled.p`
+  color: #000;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+  letter-spacing: -0.14px;
+  margin-bottom: 4px;`;
+
+export const PopUserMail = styled.p`
+  color: #94A6BE;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: -0.14px;
+  margin-bottom: 10px;`;
+
+export const PopUserTheme = styled.div`
+   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;`;
+
+export const PopUserThemeP = styled.p`
+  color: #000;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: -0.14px;`
+
+export const Checkbox = styled.input`
+  position: relative;
+  width: 24px;
+  height: 13px;
+  border-radius: 100px;
+  background: #EAEEF6;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background-color: #94A6BE;
+    transition: 0.5s;
+  }
+
+  &:checked::before {
+    left: 12px;
+  }`;
+
+export const ButtonCheckbox = styled.button`
   `
