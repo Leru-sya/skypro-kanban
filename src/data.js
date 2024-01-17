@@ -20,7 +20,7 @@ export const cardList = [
   
       theme: "Research",
   
-      title: "Новая задача",
+      title: "Название задачи",
   
       date: "30.10.23",
   
@@ -34,7 +34,7 @@ export const cardList = [
   
       theme: "Research",
   
-      title: "Нужно сделать",
+      title: "Название задачи",
   
       date: "30.10.23",
   
@@ -46,13 +46,41 @@ export const cardList = [
   
       id: 4,
   
-      theme: "Copywriting",
+      theme: "Research",
   
-      title: "Новая задача",
+      title: "Название задачи",
   
       date: "30.10.23",
   
       status: "В работе",
+  
+    },
+
+    {
+  
+      id: 5,
+  
+      theme: "Research",
+  
+      title: "Название задачи",
+  
+      date: "30.10.23",
+  
+      status: "Готово",
+  
+    },
+
+    {
+  
+      id: 6,
+  
+      theme: "Research",
+  
+      title: "Название задачи",
+  
+      date: "30.10.23",
+  
+      status: "Тестирование",
   
     },
   

@@ -1,13 +1,16 @@
-function Wrapper({children}) {
+import { WrapperItem } from "./Wrapper.styled"
+
+function Wrapper({ children }) {
     return (
-        <div className="wrapper">
-        
-        
-        
-       {children}
-       
-      </div>
-      
+
+        <WrapperItem>
+
+
+
+            {children}
+
+        </WrapperItem>
+
     )
 }
 export default Wrapper
