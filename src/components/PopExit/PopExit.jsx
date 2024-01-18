@@ -3,7 +3,7 @@ import { PopExitBlock, PopExitContainer, PopExitFormGroup, PopExitTtl, PopExitWr
 function PopExit() {
   return (
 
-    <PopExitWrapper id="popExit">
+    <PopExitWrapper className="pop-exit" id="popExit">
       <PopExitContainer>
         <PopExitBlock>
           <PopExitTtl>

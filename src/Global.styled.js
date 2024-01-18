@@ -27,4 +27,13 @@ button,
 ul li {
   list-style: none;
 }
+
+.pop-user-set:target,
+.pop-exit:target,
+.pop-new-card:target,
+.pop-browse:target {
+  display: block;
+}
+
 `;
+
