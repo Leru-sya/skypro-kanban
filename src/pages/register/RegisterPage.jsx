@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { AppRoutes } from "../lib/appRoutes";
+import { AppRoutes } from "../../lib/appRoutes";
+import './signin.css'
 
 export default function RegisterPage() {
     return (

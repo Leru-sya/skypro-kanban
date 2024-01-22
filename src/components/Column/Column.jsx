@@ -5,7 +5,7 @@ function Column({ title, cardList }) {
     return (
 
         <MainColumn>
-            {/* здесь был маинколомн и просто коломн,на что влияет? */}
+            
 
             <ColumnTitle>
                 <ColumnP>{title}</ColumnP>
@@ -14,7 +14,12 @@ function Column({ title, cardList }) {
 
             <CardsColumn>
                 {cardList.map((item) => (
-                    <Card name={item.title} theme={item.theme} date={item.date} key={item.id} />
+                    <Card 
+                    id={item.id}
+                    name={item.title} 
+                    theme={item.theme} 
+                    date={item.date} 
+                    key={item.id} />
                 ))}
             </CardsColumn>
         </MainColumn>
