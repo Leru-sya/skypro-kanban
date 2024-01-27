@@ -1,9 +1,11 @@
+import { Link } from "react-router-dom"
 import { PopExitBlock, PopExitContainer, PopExitFormGroup, PopExitTtl, PopExitWrapper } from "./PopExit.styled"
+import { AppRoutes } from "../../lib/appRoutes"
 
 function PopExit() {
   return (
 
-    <PopExitWrapper id="popExit">
+    <PopExitWrapper className="pop-exit" id="popExit">
       <PopExitContainer>
         <PopExitBlock>
           <PopExitTtl>
@@ -12,10 +14,10 @@ function PopExit() {
           <form className="pop-exit__form" id="formExit" action="#">
             <PopExitFormGroup>
               <button className="pop-exit__exit-yes _hover01" id="exitYes">
-                <a href="modal/signin.html">Да, выйти</a>{" "}
+                <Link to={AppRoutes.LOGIN}>Да, выйти</Link>{" "}
               </button>
               <button className="pop-exit__exit-no _hover03" id="exitNo">
-                <a href="main.html">Нет, остаться</a>{" "}
+                <Link to={AppRoutes.MAIN}>Нет, остаться</Link>{" "}
               </button>
             </PopExitFormGroup>
           </form>
