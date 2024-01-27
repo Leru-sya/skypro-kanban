@@ -34,7 +34,7 @@ export default function RegisterPage() {
                                 placeholder="Пароль"
                             />
                             <button className="modal__btn-signup-ent _hover01" id="SignUpEnter">
-                                <a href="../main.html">Зарегистрироваться</a>{" "}
+                                <Link to={AppRoutes.MAIN}>Зарегистрироваться</Link>{" "}
                             </button>
                             <div className="modal__form-group">
                                 <p>
