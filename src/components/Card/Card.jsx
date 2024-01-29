@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { CardBtn, CardBtnDiv, CardContent, CardDate, CardDateP, CardDateSvg, CardGroup, CardItem, CardTheme, CardThemeText, CardTitle, CardWrapper } from "./Card.styled"
 import { AppRoutes } from "../../lib/appRoutes";
 
-function Card({ name, theme, date, id }) {
+function Card({ name, theme, date, id , topic}) {
     
     let color;
     switch (theme) {
@@ -19,7 +19,7 @@ function Card({ name, theme, date, id }) {
             <CardWrapper>
                 <CardGroup>
                     <CardTheme $themeColor={color}>
-                        <CardThemeText>{theme}</CardThemeText>
+                        <CardThemeText>{topic}</CardThemeText>
                     </CardTheme>
                     <Link to={`${AppRoutes.CARD}/${id}`}>
 
