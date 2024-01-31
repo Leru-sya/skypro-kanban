@@ -27,7 +27,7 @@ export async function getTasks({ token }) {
         }
     });
     if (response.status !== 200) {
-        throw new Error("Нет авторизации");
+        throw new Error("Ошибка авторизации");
     } else {
         const data = await response.json();
         return data;
@@ -40,11 +40,11 @@ export async function register({ login, password, name }) {
         body: JSON.stringify({
             login,
             password,
-            name
+            name,
         }),
     });
     if (response.status === 400) {
-        throw new Error("Ошибка авторизации")
+        throw new Error("Ошибка регистрации")
     } else {
         const data = await response.json();
         return data;

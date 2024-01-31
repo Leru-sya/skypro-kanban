@@ -35,9 +35,9 @@ function addCard() {
 		...cards,
 		{
 
-			id: cards.length + 1,
+			_id: cards.length + 1,
 
-			theme: "Research",
+			topic: "Research",
 
 			title: "Новая задача",
 

@@ -1,7 +1,7 @@
 import PopExit from "../components/PopExit/PopExit";
 
-export default function ExitPage() {
+export default function ExitPage({setUserData}) {
     return (
-        <PopExit />
+        <PopExit setUserData ={setUserData}/>
     )
 }
