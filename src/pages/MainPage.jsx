@@ -9,44 +9,53 @@ import { cardList } from '../data'
 import { GlobalStyle } from '../Global.styled'
 import "../App.css"
 import { Outlet } from 'react-router-dom'
+import { getTasks } from '../api'
 
-export default function MainPage() {
-	const [cards, setCards] = useState(cardList);
+export default function MainPage({ userData }) {
+	const [cards, setCards] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
+	const [getCardsError, setGetCardsError] = useState(null);
 
 	useEffect(() => {
-		setTimeout(() => {
+		getTasks({ token: userData.token })
+			.then((data) => {
+				setCards(data.tasks)
+				console.log(data);
+			})
+			.catch((error) => {
+				setGetCardsError(error.message)
+	})
+		.then(() => {
 			setIsLoading(false)
-		}, 1000)
-	}, [])
+		})
+}, [])
 
-	function addCard() {
-		setCards([
-			...cards,
-			{
+function addCard() {
+	setCards([
+		...cards,
+		{
 
-				id: cards.length + 1,
+			_id: cards.length + 1,
 
-				theme: "Research",
+			topic: "Research",
 
-				title: "Новая задача",
+			title: "Новая задача",
 
-				date: "30.10.23",
+			date: "30.10.23",
 
-				status: "Без статуса",
+			status: "Без статуса",
 
-			}
-		])
-	}
+		}
+	])
+}
 
-	return (<>
-		<GlobalStyle />
-		<Wrapper>
-			<Outlet />
-			<PopNewCard />
-			<Outlet />
-			<Header addCard={addCard} />
-			<Main isLoading={isLoading} cardList={cards} />
-		</Wrapper>
-	</>)
+return (<>
+	<GlobalStyle />
+	<Wrapper>
+		<Outlet />
+		<PopNewCard />
+		<Outlet />
+		<Header addCard={addCard} />{getCardsError ? (<p style={{ color: "red" }}>{getCardsError}</p>) : (<Main isLoading={isLoading} cardList={cards} />)}
+	</Wrapper>
+</>)
 }
