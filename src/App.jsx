@@ -17,7 +17,7 @@ function App() {
 	const[userData, setUserData] = useState(null);
 	return (
 		<Routes>
-			<Route element={<PrivateRoute user={userData} />}>
+			<Route element={<PrivateRoute />}>
 				<Route path={AppRoutes.MAIN} element={<MainPage userData={userData} />}>
 					<Route path={`${AppRoutes.CARD}/:cardId`} element={<CardPage />} />
 					<Route path={AppRoutes.EXIT} element={<ExitPage setUserData={setUserData} />} />
