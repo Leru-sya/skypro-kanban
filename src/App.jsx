@@ -18,13 +18,13 @@ function App() {
 	return (
 		<Routes>
 			<Route element={<PrivateRoute />}>
-				<Route path={AppRoutes.MAIN} element={<MainPage userData={userData} />}>
+				<Route path={AppRoutes.MAIN} element={<MainPage />}>
 					<Route path={`${AppRoutes.CARD}/:cardId`} element={<CardPage />} />
 					<Route path={AppRoutes.EXIT} element={<ExitPage setUserData={setUserData} />} />
 				</Route>
 			</Route>
-			<Route path={AppRoutes.LOGIN} element={<LoginPage setUserData={setUserData} />} />
-			<Route path={AppRoutes.REGISTER} element={<RegisterPage setUserData={setUserData} />} />
+			<Route path={AppRoutes.LOGIN} element={<LoginPage />} />
+			<Route path={AppRoutes.REGISTER} element={<RegisterPage/>} />
 			<Route path={AppRoutes.NOT_FOUND} element={<NotFoundPage />} />
 		</Routes>
 	);

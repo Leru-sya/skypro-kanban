@@ -1,12 +1,12 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link,  } from "react-router-dom";
 import { AppRoutes } from "../../lib/appRoutes";
 import './signup.css'
 import { useState } from "react";
 import { login } from "../../api";
+import { useUser } from "../../hooks/useUser";
 
-export default function LoginPage({ setUserData }) {
-
-    let navigate = useNavigate();
+export default function LoginPage() {
+    const { loginUser } = useUser();
 
     const loginForm = {
         login: '',
@@ -20,9 +20,7 @@ export default function LoginPage({ setUserData }) {
             e.preventDefault()
             await login(loginData).then((data) => {
                 console.log(data);
-                setUserData(data.user);
-            }).then(() => {
-                navigate(AppRoutes.MAIN)
+                loginUser(data.user)
             })
         } catch (error) {
             setAddToDoError(error.message)

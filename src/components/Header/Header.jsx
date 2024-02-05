@@ -4,7 +4,7 @@ import { HeaderItem, HeaderBlock, HeaderLogo, HeaderNav, MainButton, UserName, H
 import { Link } from "react-router-dom";
 import { AppRoutes } from "../../lib/appRoutes";
 
-function Header({ addCard, user }) {
+function Header({ addCard, userData }) {
   const [isOpen, setIsOpen] = useState(false);
   function togglePopUp() {
     setIsOpen((prev) => !prev)
@@ -33,7 +33,7 @@ function Header({ addCard, user }) {
               Создать новую задачу
             </MainButton>
             <UserName href="#" onClick={togglePopUp}>
-              {user.login}
+              {userData.login}
             </UserName>
             {isOpen && <div
               className="header__pop-user-set pop-user-set"
@@ -41,8 +41,8 @@ function Header({ addCard, user }) {
             >
               <a href=""></a>
 
-              <PopUserName>{user.name}</PopUserName>
-              <PopUserMail>{user.login}</PopUserMail>
+              <PopUserName>{userData.name}</PopUserName>
+              <PopUserMail>{userData.login}</PopUserMail>
 
               <PopUserTheme>
                 <PopUserThemeP>Темная тема</PopUserThemeP>
