@@ -11,7 +11,7 @@ export async function login({ login, password }) {
         })
     });
 
-    if (response.status === 400) {
+    if (response.status === 401) {
         throw new Error("Нет авторизации");
     } else {
         const data = await response.json();
@@ -26,7 +26,22 @@ export async function getTasks({ token }) {
             Authorization: `Bearer ${token}`
         }
     });
-    if (response.status !== 200) {
+    if (response.status === 401) {
+        throw new Error("Ошибка авторизации");
+    } else {
+        const data = await response.json();
+        return data;
+    }
+}
+export async function createTasks({ token, tasks }) {
+    const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(tasks)
+    });
+    if (response.status === 401) {
         throw new Error("Ошибка авторизации");
     } else {
         const data = await response.json();
@@ -45,6 +60,20 @@ export async function register({ login, password, name }) {
     });
     if (response.status === 400) {
         throw new Error("Ошибка регистрации")
+    } else {
+        const data = await response.json();
+        return data;
+    }
+}
+export async function deleteCard({ token, id }) {
+    const response = await fetch(API_URL + '/' + id, {
+        method: "DELETE",
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+    });
+    if (response.status >= 400) {
+        throw new Error("Ошибка удаления")
     } else {
         const data = await response.json();
         return data;

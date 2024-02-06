@@ -4,8 +4,8 @@ import { AppRoutes } from "../lib/appRoutes";
 
 export const UserContext = createContext(null);
 
-const getUserFromLocalStorage =() =>{
-return JSON.parse(localStorage.getItem('user'))
+const getUserFromLocalStorage = () => {
+    return JSON.parse(localStorage.getItem('user'))
 }
 
 export const UserProvider = ({ children }) => {
@@ -13,7 +13,7 @@ export const UserProvider = ({ children }) => {
     const [userData, setUserData] = useState(getUserFromLocalStorage());
     const loginUser = (user) => {
         setUserData(user);
-        localStorage.setItem('user',JSON.stringify(user))
+        localStorage.setItem('user', JSON.stringify(user))
         navigate(AppRoutes.MAIN)
     }
 

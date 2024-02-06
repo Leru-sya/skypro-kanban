@@ -22,7 +22,6 @@ export default function RegisterPage() {
         e.preventDefault()
         await register(registerData)
             .then((data) => {
-                console.log(data);
                 loginUser(data.user)
             })
             .catch((error)=>{

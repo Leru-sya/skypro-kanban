@@ -1,14 +1,19 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Container } from "../Common/Common.styled";
 import { HeaderItem, HeaderBlock, HeaderLogo, HeaderNav, MainButton, UserName, HeaderImg, PopUserName, PopUserMail, PopUserTheme, PopUserThemeP, Checkbox } from "./Header.styled";
 import { Link } from "react-router-dom";
 import { AppRoutes } from "../../lib/appRoutes";
+import { ModalContext } from "../../contexts/modalContext";
+import PopNewCard from "../PopNewCard/PopNewCard";
+import { CardsContext } from "../../contexts/cardsContext";
 
-function Header({ addCard, userData }) {
+function Header({ userData }) {
   const [isOpen, setIsOpen] = useState(false);
   function togglePopUp() {
     setIsOpen((prev) => !prev)
   }
+  const { open, handleOpenModal, handleCloseModal } = useContext(ModalContext)
+  const { setCards } = useContext(CardsContext)
   return (
 
     <HeaderItem>
@@ -29,7 +34,12 @@ function Header({ addCard, userData }) {
           </HeaderLogo>
 
           <HeaderNav>
-            <MainButton id="btnMainNew" onClick={addCard}>
+            <MainButton id="btnMainNew" onClick={() => handleOpenModal({
+              title: 'Создать новую задачу', content: <PopNewCard addCard={(cards) => {
+                setCards(cards)
+                handleCloseModal()
+              }} />
+            })}>
               Создать новую задачу
             </MainButton>
             <UserName href="#" onClick={togglePopUp}>

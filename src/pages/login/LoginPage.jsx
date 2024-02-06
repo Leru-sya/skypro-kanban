@@ -1,4 +1,4 @@
-import { Link,  } from "react-router-dom";
+import { Link, } from "react-router-dom";
 import { AppRoutes } from "../../lib/appRoutes";
 import './signup.css'
 import { useState } from "react";
@@ -19,11 +19,10 @@ export default function LoginPage() {
         try {
             e.preventDefault()
             await login(loginData).then((data) => {
-                console.log(data);
                 loginUser(data.user)
             })
         } catch (error) {
-            setAddToDoError(error.message)
+            console.log(error.message)
         }
 
     }

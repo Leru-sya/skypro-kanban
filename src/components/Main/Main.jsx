@@ -1,6 +1,8 @@
+import { useContext } from "react";
 import Column from "../Column/Column"
 import { Container } from "../Common/Common.styled";
 import { MainBlock, MainContent, MainItem } from "./Main.styled";
+import { CardsContext } from "../../contexts/cardsContext";
 
 const statusList = [
     "Без статуса",
@@ -10,7 +12,8 @@ const statusList = [
     "Готово",
 ];
 
-function Main({ cardList, isLoading }) {
+function Main() {
+    const { cards, setCards, isLoading } = useContext(CardsContext)
     return (
         <MainItem>
 
@@ -23,7 +26,7 @@ function Main({ cardList, isLoading }) {
                             <Column
                                 key={item}
                                 title={item}
-                                cardList={cardList.filter((card) => card.status === item)} />
+                                cardList={cards.filter((card) => card.status === item)} />
                         ))}
 
                     </MainContent>
