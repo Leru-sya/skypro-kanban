@@ -4,5 +4,5 @@ import { useUser } from "../../hooks/useUser";
 
 export default function PrivateRoute() {
     const { userData } = useUser();
-    return userData ? <Outlet /> : <Navigate to={AppRoutes.LOGIN} />
+    return userData.token ? <Outlet /> : <Navigate to={AppRoutes.LOGIN} />
 }

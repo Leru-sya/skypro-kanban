@@ -24,7 +24,7 @@ export const CardsProvider = ({ children }) => {
     }
     useEffect(() => {
         refetchCards()
-    }, [])
+    }, [userData.token])
     return (
         <CardsContext.Provider value={{ cards, setCards, isLoading, setIsLoading, getCardsError, setGetCardsError, refetchCards }}>{children}</CardsContext.Provider>
     )

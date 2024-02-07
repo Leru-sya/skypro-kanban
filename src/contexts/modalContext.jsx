@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import PopNewCard from "../components/PopNewCard/PopNewCard";
+
 
 export const ModalContext = createContext(null);
 

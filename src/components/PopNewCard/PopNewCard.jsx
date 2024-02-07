@@ -5,14 +5,14 @@ import { Calendar } from "../Calendar/Calendar";
 
 function PopNewCard({ addCard }) {
 
-  const [selected, setSelected] = useState();
+  
   const { userData } = useUser();
   const modalForm = {
     title: '',
     description: '',
     topic: '',
     status: "Без статуса",
-    
+date:''
   }
   const [modalData, setModalData] = useState(modalForm);
   const handleInputChange = (e) => {
@@ -33,6 +33,13 @@ function PopNewCard({ addCard }) {
       console.log(error.message)
     }
 
+  }
+
+  const handleCalendarChange =(value) =>{
+    setModalData({
+      ...modalData,
+      date: value,
+    });
   }
   return (
     <>
@@ -69,9 +76,9 @@ function PopNewCard({ addCard }) {
             />
           </div>
         </form>
-        
-          <Calendar selected={selected} setSelected={setSelected}/>
-        
+
+        <Calendar selected={modalData.date} setSelected={handleCalendarChange}/>
+
       </div>
       <div className="pop-new-card__categories categories">
         <p className="categories__p subttl">Категория</p>
