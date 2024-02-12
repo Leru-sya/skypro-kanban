@@ -1,11 +1,16 @@
 import { Link } from "react-router-dom";
 import { CardBtn, CardBtnDiv, CardContent, CardDate, CardDateP, CardDateSvg, CardGroup, CardItem, CardTheme, CardThemeText, CardTitle, CardWrapper } from "./Card.styled"
 import { AppRoutes } from "../../lib/appRoutes";
+import { useContext } from "react";
+import { ModalContext } from "../../contexts/modalContext";
+import { HeaderPopBrowse, PopBrowse } from "../PopBrowse/PopBrowse";
+import { format } from "date-fns";
+import { CardsContext } from "../../contexts/cardsContext";
 
-function Card({ name, theme, date, id , topic}) {
-    
+function Card({ item }) {
+    const { date, description, status, title, topic, _id } = item
     let color;
-    switch (theme) {
+    switch (item.topic) {
         case "Web Design":
             color = "_orange";
             break;
@@ -14,6 +19,8 @@ function Card({ name, theme, date, id , topic}) {
             color = "_purple";
             break;
     }
+    const { handleOpenModal, handleCloseModal } = useContext(ModalContext)
+    const { setCards } = useContext(CardsContext)
     return (
         <CardItem>
             <CardWrapper>
@@ -21,22 +28,19 @@ function Card({ name, theme, date, id , topic}) {
                     <CardTheme $themeColor={color}>
                         <CardThemeText>{topic}</CardThemeText>
                     </CardTheme>
-                    <Link to={`${AppRoutes.CARD}/${id}`}>
 
-                        <CardBtn>
-
-                            <CardBtnDiv>
-                                <div /></CardBtnDiv>
-                            <CardBtnDiv><div /></CardBtnDiv>
-                            <CardBtnDiv><div /></CardBtnDiv>
-                        </CardBtn>
-                    </Link>
+                    <CardBtn onClick={() => handleOpenModal({ title: <HeaderPopBrowse item={item} />, content: <PopBrowse item={item} setCards={setCards} handleCloseModal={handleCloseModal} /> })}>
+                        <CardBtnDiv>
+                            <div /></CardBtnDiv>
+                        <CardBtnDiv><div /></CardBtnDiv>
+                        <CardBtnDiv><div /></CardBtnDiv>
+                    </CardBtn>
                 </CardGroup>
 
                 <CardContent>
-                    <Link to={`${AppRoutes.CARD}/${id}`}>
+                    <Link to={`${AppRoutes.CARD}/${_id}`}>
 
-                        <CardTitle>{name}</CardTitle>
+                        <CardTitle>{title}</CardTitle>
                     </Link>
 
                     <CardDate>
@@ -68,12 +72,12 @@ function Card({ name, theme, date, id , topic}) {
                                 </clipPath>
                             </defs>
                         </CardDateSvg>
-                        <CardDateP>{date}</CardDateP>
+                        <CardDateP>{format(date, "dd.MM.yyyy")}</CardDateP>
 
                     </CardDate>
                 </CardContent>
             </CardWrapper>
-        </CardItem>
+        </CardItem >
     )
 }
 export default Card

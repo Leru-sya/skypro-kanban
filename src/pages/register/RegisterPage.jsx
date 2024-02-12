@@ -1,12 +1,13 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link,  } from "react-router-dom";
 import { AppRoutes } from "../../lib/appRoutes";
 import './signin.css'
 import { register } from "../../api";
 import { useState } from "react";
+import { useUser } from "../../hooks/useUser";
 
-export default function RegisterPage({ setUserData }) {
-
-    let navigate = useNavigate();
+export default function RegisterPage() {
+    const { loginUser } = useUser();
+    
 
     const regForm = {
         name: '',
@@ -15,17 +16,17 @@ export default function RegisterPage({ setUserData }) {
     };
 
     const [registerData, setRegisterData] = useState(regForm);
+    const [addToDoError, setAddToDoError] = useState(null);
 
     const handleReg = async (e) => {
         e.preventDefault()
         await register(registerData)
             .then((data) => {
-                console.log(data);
-                setUserData(data.user)
-
+                loginUser(data.user)
             })
-            .then(() => {
-                navigate(AppRoutes.MAIN)
+            .catch((error)=>{
+                setAddToDoError(error.message)
+
             })
     }
 
@@ -77,6 +78,7 @@ export default function RegisterPage({ setUserData }) {
                                 onChange={handleRegChange}
                                 label="password"
                             />
+                            <p style={{ color: "red" }}>{addToDoError}</p>
                             <button className="modal__btn-signup-ent _hover01" id="SignUpEnter" onClick={handleReg}>
                                 Зарегистрироваться
                             </button>
