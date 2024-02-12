@@ -79,3 +79,19 @@ export async function deleteCard({ token, id }) {
         return data;
     }
 }
+
+export async function editCardQuery({ token, id, info }) {
+    const response = await fetch(API_URL + '/' + id, {
+        method: "PUT",
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(info)
+    });
+    if (response.status >= 400) {
+        throw new Error("Ошибка редактирования")
+    } else {
+        const data = await response.json();
+        return data;
+    }
+}

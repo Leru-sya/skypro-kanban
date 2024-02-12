@@ -1,22 +1,44 @@
 import { Link, useParams } from "react-router-dom"
 import { AppRoutes } from "../../lib/appRoutes"
-import { deleteCard } from "../../api"
+import { deleteCard, editCardQuery } from "../../api"
 import { useUser } from "../../hooks/useUser"
 import { Calendar } from "../Calendar/Calendar"
-import { useState } from "react"
+import React, { useState } from "react"
 
+const TYPE_COLOR = {
+  "Web Design": "_orange",
+  "Copywriting": "_purple",
+  "Research": "_green",
+
+}
 export const HeaderPopBrowse = ({ item }) => {
+  const color = TYPE_COLOR[item.topic] || "_gray"
 
   return (<div className="pop-browse__top-block">
     <h3 className="pop-browse__ttl">Название задачи:{item.title}</h3>
-    <div className="categories__theme theme-top _orange _active-category">
-      <p className="_orange">Web Design</p>
+    <div className={`categories__theme theme-top ${color} _active-category`}>
+      <p>{item.topic}</p>
     </div>
   </div>)
 }
 export const PopBrowse = ({ item, setCards, handleCloseModal }) => {
+  const [storedValue, setStoredValue] = useState({});
+  const [editCard, setEditCard] = useState(false)
   const { userData } = useUser();
-  const handleLogin = async (e) => {
+  const modalForm = item;
+  const [modalData, setModalData] = useState(modalForm);
+
+  const editClick = () => {
+    setStoredValue(modalData)
+    setEditCard(true)
+  }
+
+  const cancelClick = () => {
+    setModalData(storedValue)
+    setStoredValue({})
+    setEditCard(false)
+  }
+  const deleteTask = async (e) => {
     try {
       e.preventDefault()
       await deleteCard({ token: userData.token, id: item._id }).then((data) => {
@@ -29,42 +51,51 @@ export const PopBrowse = ({ item, setCards, handleCloseModal }) => {
 
   }
 
-  const modalForm = item
+  const editTask = async (e) => {
+    try {
+      e.preventDefault()
+      await editCardQuery({ token: userData.token, id: item._id, info: modalData }).then((data) => {
+        setCards(data.tasks)
+        setEditCard(false)
+        setStoredValue({})
+      })
+    } catch (error) {
+      console.log(error.message)
+    }
 
-  const [modalData, setModalData] = useState(modalForm);
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-
+  }
+  const valueChange = (value, name) => {
     setModalData({
       ...modalData,
       [name]: value,
     });
+  }
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    valueChange(value, name)
   };
 
-  const handleCalendarChange =(value) =>{
-    setModalData({
-      ...modalData,
-      date: value,
-    });}
+  const handleCalendarChange = (value) => {
+    valueChange(value, 'date')
+  }
+
+  const handleStatusChange = (value) => {
+    valueChange(value, 'status')
+  }
+
+  const STATUS = ['Без статуса', 'Нужно сделать', 'В работе', 'Тестирование', 'Готово']
   return (<>
     <div className="pop-browse__status status">
       <p className="status__p subttl">Статус</p>
       <div className="status__themes">
-        <div className="status__theme _hide">
-          <p>{item.status}</p>
-        </div>
-        <div className="status__theme _gray">
-          <p className="_gray">Нужно сделать</p>
-        </div>
-        <div className="status__theme _hide">
-          <p>В работе</p>
-        </div>
-        <div className="status__theme _hide">
-          <p>Тестирование</p>
-        </div>
-        <div className="status__theme _hide">
-          <p>Готово</p>
-        </div>
+        {STATUS.map((el, key) =>
+          <React.Fragment key={key}>{(editCard || modalData.status === el) && <div onClick={() => handleStatusChange(el)} className={`status__theme ${modalData.status === el ? '_gray' : ''}`}>
+            <p className={` ${modalData.status === el ? '_gray' : ''}`}>{el}</p>
+          </div>}
+          </React.Fragment>
+        )}
       </div>
     </div>
     <div className="pop-browse__wrap">
@@ -78,40 +109,61 @@ export const PopBrowse = ({ item, setCards, handleCloseModal }) => {
             Описание задачи
           </label>
           <textarea
+            disabled={!editCard}
             className="form-browse__area"
             name="description"
             id="textArea01"
             readOnly=""
             placeholder="Введите описание задачи..."
-            defaultValue={modalData.description}
+            value={modalData.description}
             onChange={handleInputChange}
           />
         </div>
       </form>
-      <Calendar selected={new Date(modalData.date)} setSelected={handleCalendarChange} />
+      <Calendar disabled={!editCard} selected={new Date(modalData.date)} setSelected={handleCalendarChange} />
     </div>
-    {/* <div className="theme-down__categories theme-down">
-      <p className="categories__p subttl">Категория</p>
-      <div className="categories__theme _orange _active-category">
-        <p className="_orange">Web Design</p>
-      </div>
-    </div> */}
     <div className="pop-browse__btn-browse ">
-      <div className="btn-group">
-        <button className="btn-browse__edit _btn-bor _hover03">
-          <a href="#">Редактировать задачу</a>
-        </button>
-        <button
-          className="btn-edit__delete _btn-bor _hover03"
-          id="btnDelete"
-          onClick={handleLogin}
-        >
-          Удалить задачу
-        </button>
-      </div>
-      <button className="btn-browse__close _btn-bg _hover01" onClick={handleCloseModal}>
-        Закрыть
-      </button>
+      {editCard && <>
+        <div className="btn-group" >
+          <button className="btn-edit__edit _btn-bg _hover01" onClick={editTask}>
+
+            Сохранить
+          </button>
+          <button className="btn-edit__edit _btn-bor _hover03" onClick={cancelClick}>
+            Отменить
+          </button>
+          <button
+            className="btn-edit__delete _btn-bor _hover03"
+            id="btnDelete"
+            onClick={deleteTask}
+          >
+            Удалить задачу
+          </button>
+        </div>
+
+        <button className="btn-edit__close _btn-bg _hover01"
+          onClick={handleCloseModal}>
+          Закрыть
+        </button></>}
+
+
+      {!editCard && <>
+        <div className="btn-group" >
+          <button className="btn-browse__edit _btn-bor _hover03" onClick={editClick}>
+            Редактировать задачу
+          </button>
+          <button
+            className="btn-edit__delete _btn-bor _hover03"
+            id="btnDelete"
+            onClick={deleteTask}
+          >
+            Удалить задачу
+          </button>
+        </div>
+        <button className="btn-browse__close _btn-bg _hover01" onClick={handleCloseModal}>
+          Закрыть
+        </button></>}
+
     </div>
   </>)
 }

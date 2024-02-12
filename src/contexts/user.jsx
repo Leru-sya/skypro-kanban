@@ -1,13 +1,18 @@
-import { createContext,  useState } from "react";
-import {  useNavigate } from "react-router-dom";
+import { createContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AppRoutes } from "../lib/appRoutes";
 
 export const UserContext = createContext(null);
 
 const getUserFromLocalStorage = () => {
-    return JSON.parse(localStorage.getItem('user')) || { token: '' }
-};
+    try {
+        return JSON.parse(localStorage.getItem('user'))
+    } catch {
+        return { token: '' }
 
+    }
+}
+    
 
 export const UserProvider = ({ children }) => {
 
@@ -24,7 +29,7 @@ export const UserProvider = ({ children }) => {
         localStorage.removeItem('user');
         navigate(AppRoutes.LOGIN)
     }
-    
+
     return (
         <UserContext.Provider value={{ userData, loginUser, logoutUser }}>{children}</UserContext.Provider>
     )
