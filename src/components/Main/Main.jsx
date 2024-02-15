@@ -13,7 +13,7 @@ const statusList = [
 ];
 
 function Main() {
-    const { cards, setCards, isLoading } = useContext(CardsContext)
+    const { cards, isLoading } = useContext(CardsContext)
     return (
         <MainItem>
 

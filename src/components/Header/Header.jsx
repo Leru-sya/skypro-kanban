@@ -12,7 +12,7 @@ function Header({ userData }) {
   function togglePopUp() {
     setIsOpen((prev) => !prev)
   }
-  const { open, handleOpenModal, handleCloseModal } = useContext(ModalContext)
+  const { handleOpenModal, handleCloseModal } = useContext(ModalContext)
   const { setCards } = useContext(CardsContext)
   return (
 

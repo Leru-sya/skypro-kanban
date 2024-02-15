@@ -10,7 +10,7 @@ import { CardsContext } from '../contexts/cardsContext'
 
 export default function MainPage() {
 	const { userData } = useUser();
-	const { cards, setCards, isLoading, getCardsError } = useContext(CardsContext)
+	const { isLoading, getCardsError } = useContext(CardsContext)
 	return (<>
 		<GlobalStyle />
 		<Wrapper>

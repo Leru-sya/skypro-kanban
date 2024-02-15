@@ -13,6 +13,7 @@ export function Calendar({ selected, setSelected, disabled }) {
     footer = <p>Вы выбрали {format(selected, 'PP', { locale: ru })}.</p>;
   }
   return (
+    
     <DayPicker
       disabled={disabled}
       locale={ru}

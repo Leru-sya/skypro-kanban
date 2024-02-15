@@ -1,9 +1,9 @@
-import { Link, useParams } from "react-router-dom"
-import { AppRoutes } from "../../lib/appRoutes"
+
 import { deleteCard, editCardQuery } from "../../api"
 import { useUser } from "../../hooks/useUser"
 import { Calendar } from "../Calendar/Calendar"
 import React, { useState } from "react"
+import { PopBrowseSta, PopBrowseTopBlock, StatusP, StatusThemes, TaskDesc } from "./PopBrowse.styled"
 
 const TYPE_COLOR = {
   "Web Design": "_orange",
@@ -14,12 +14,12 @@ const TYPE_COLOR = {
 export const HeaderPopBrowse = ({ item }) => {
   const color = TYPE_COLOR[item.topic] || "_gray"
 
-  return (<div className="pop-browse__top-block">
-    <h3 className="pop-browse__ttl">Название задачи:{item.title}</h3>
+  return (
+    <PopBrowseTopBlock><h3 className="pop-browse__ttl">Название задачи:{item.title}</h3>
     <div className={`categories__theme theme-top ${color} _active-category`}>
       <p>{item.topic}</p>
-    </div>
-  </div>)
+    </div></PopBrowseTopBlock>
+  )
 }
 export const PopBrowse = ({ item, setCards, handleCloseModal }) => {
   const [storedValue, setStoredValue] = useState({});
@@ -86,28 +86,27 @@ export const PopBrowse = ({ item, setCards, handleCloseModal }) => {
   }
 
   const STATUS = ['Без статуса', 'Нужно сделать', 'В работе', 'Тестирование', 'Готово']
-  return (<>
-    <div className="pop-browse__status status">
-      <p className="status__p subttl">Статус</p>
-      <div className="status__themes">
+  return (<>  
+      <PopBrowseSta>
+        <StatusP>Статус</StatusP>
+        <StatusThemes>
         {STATUS.map((el, key) =>
           <React.Fragment key={key}>{(editCard || modalData.status === el) && <div onClick={() => handleStatusChange(el)} className={`status__theme ${modalData.status === el ? '_gray' : ''}`}>
             <p className={` ${modalData.status === el ? '_gray' : ''}`}>{el}</p>
           </div>}
           </React.Fragment>
         )}
-      </div>
-    </div>
+      </StatusThemes>
+      </PopBrowseSta>
+      
     <div className="pop-browse__wrap">
       <form
         className="pop-browse__form form-browse"
         id="formBrowseCard"
         action="#"
       >
-        <div className="form-browse__block">
-          <label htmlFor="textArea01" className="subttl">
-            Описание задачи
-          </label>
+        <div className="form-browse__block">          
+            <TaskDesc> Описание задачи</TaskDesc>        
           <textarea
             disabled={!editCard}
             className="form-browse__area"
@@ -120,6 +119,7 @@ export const PopBrowse = ({ item, setCards, handleCloseModal }) => {
           />
         </div>
       </form>
+  
       <Calendar disabled={!editCard} selected={new Date(modalData.date)} setSelected={handleCalendarChange} />
     </div>
     <div className="pop-browse__btn-browse ">
