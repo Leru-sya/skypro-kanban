@@ -1,4 +1,4 @@
-const token = "asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k";
+
 const API_URL_USER = 'https://wedev-api.sky.pro/api/user';
 const API_URL = 'https://wedev-api.sky.pro/api/kanban';
 
@@ -74,6 +74,22 @@ export async function deleteCard({ token, id }) {
     });
     if (response.status >= 400) {
         throw new Error("Ошибка удаления")
+    } else {
+        const data = await response.json();
+        return data;
+    }
+}
+
+export async function editCardQuery({ token, id, info }) {
+    const response = await fetch(API_URL + '/' + id, {
+        method: "PUT",
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(info)
+    });
+    if (response.status >= 400) {
+        throw new Error("Ошибка редактирования")
     } else {
         const data = await response.json();
         return data;

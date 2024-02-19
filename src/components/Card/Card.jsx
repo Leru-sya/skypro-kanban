@@ -8,7 +8,7 @@ import { format } from "date-fns";
 import { CardsContext } from "../../contexts/cardsContext";
 
 function Card({ item }) {
-    const { date, description, status, title, topic, _id } = item
+    const { date, title, topic, _id } = item
     let color;
     switch (item.topic) {
         case "Web Design":
@@ -38,10 +38,7 @@ function Card({ item }) {
                 </CardGroup>
 
                 <CardContent>
-                    <Link to={`${AppRoutes.CARD}/${_id}`}>
-
-                        <CardTitle>{title}</CardTitle>
-                    </Link>
+                    <CardTitle onClick={() => handleOpenModal({ title: <HeaderPopBrowse item={item} />, content: <PopBrowse item={item} setCards={setCards} handleCloseModal={handleCloseModal} /> })}>{title}</CardTitle>
 
                     <CardDate>
                         <CardDateSvg

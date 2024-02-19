@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createTasks } from "../../api";
 import { useUser } from "../../hooks/useUser";
 import { Calendar } from "../Calendar/Calendar";
+import { PopNewWrap, TaskDesc } from "./PopNewCard.styled";
 
 function PopNewCard({ addCard }) {
 
@@ -43,16 +44,13 @@ date:''
   }
   return (
     <>
-      <div className="pop-new-card__wrap">
-        <form
+        <PopNewWrap> <form
           className="pop-new-card__form form-new"
           id="formNewCard"
           action="#"
         >
           <div className="form-new__block">
-            <label htmlFor="formTitle" className="subttl">
-              Название задачи
-            </label>
+              <TaskDesc>Название задачи</TaskDesc>
             <input
               className="form-new__input"
               type="text"
@@ -64,9 +62,7 @@ date:''
             />
           </div>
           <div className="form-new__block">
-            <label htmlFor="textArea" className="subttl">
-              Описание задачи
-            </label>
+              <TaskDesc>Описание задачи</TaskDesc>
             <textarea
               className="form-new__area"
               name="description"
@@ -77,9 +73,8 @@ date:''
           </div>
         </form>
 
-        <Calendar selected={modalData.date} setSelected={handleCalendarChange}/>
-
-      </div>
+        <Calendar selected={modalData.date} setSelected={handleCalendarChange}/></PopNewWrap>
+       
       <div className="pop-new-card__categories categories">
         <p className="categories__p subttl">Категория</p>
         <div className="categories__themes">

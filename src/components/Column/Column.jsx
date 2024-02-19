@@ -1,4 +1,4 @@
-import { useOutletContext } from "react-router-dom";
+
 import Card from "../Card/Card"
 import { CardsColumn, ColumnP, ColumnTitle, MainColumn } from "./Column.styled"
 
